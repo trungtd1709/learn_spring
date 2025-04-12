@@ -8,4 +8,6 @@ public interface UserService {
     ResponseEntity<ApiResponse<UserDTO>> createUser(UserDTO userDTO);
 
     Integer generateFakeUsers();
+
+    void generateFakeUsersAsync();
 }

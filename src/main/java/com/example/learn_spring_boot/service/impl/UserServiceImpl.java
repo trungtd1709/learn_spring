@@ -9,25 +9,22 @@ import com.example.learn_spring_boot.utils.mapper.UserMapper;
 import com.github.javafaker.Faker;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 @Slf4j
 @Service
 public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
     private final UserRepository userRepository;
     private final Faker faker;
-
-    public UserServiceImpl(UserMapper userMapper, UserRepository userRepository) {
-        this.userMapper = userMapper;
-        this.userRepository = userRepository;
-        this.faker = new Faker();
-    }
 
     @Override
     public ResponseEntity<ApiResponse<UserDTO>> createUser(UserDTO userDTO) {
@@ -41,11 +38,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public Integer generateFakeUsers() {
         log.info("Start generating fake users");
+        int numOfUsers = 0;
 
         List<User> users = new ArrayList<>();
-        for (int i = 0; i < 1000; i++) {
+        String threadName = Thread.currentThread().getName();
+        for (int i = 0; i < 2000000; i++) {
             User user = User.builder()
-                    .username(faker.name().username())
+                    .username(faker.name().username() + " " + threadName)
                     .password(faker.internet().password())
                     .firstName(faker.name().firstName())
                     .lastName(faker.name().lastName())
@@ -54,13 +53,29 @@ public class UserServiceImpl implements UserService {
                     .address(faker.address().streetAddress())
                     .city(faker.address().city())
                     .country(faker.address().country())
+                    .birthday(faker.date().birthday())
                     .build();
             users.add(user);
-//            userRepository.save(user);
-            log.info("User number {} created", i);
+
+            if (users.size() == 50) { // Batch size of 50, you can adjust it for better performance
+                userRepository.saveAll(users);  // Perform batch insert
+                numOfUsers+=users.size();
+                users.clear();  // Clear the list to start adding the next batch
+                log.info("Inserted 50 users into database: {}", numOfUsers);
+            }
         }
-        userRepository.saveAll(users);
+
+        if (!users.isEmpty()) {
+            userRepository.saveAll(users);  // Save remaining users if they exist
+            log.info("Inserted remaining users");
+        }
+
         log.info("End generating fake users");
-        return users.size();
+        return numOfUsers;
+    }
+
+    @Async
+    public void generateFakeUsersAsync (){
+        this.generateFakeUsers();
     }
 }

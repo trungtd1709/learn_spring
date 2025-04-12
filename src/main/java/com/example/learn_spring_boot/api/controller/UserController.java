@@ -24,9 +24,30 @@ public class UserController implements UserEndPoint {
 
     @Override
     public ResponseEntity<ApiResponse<Integer>> generateFakeUsers() {
-         Integer numOfUsers = userService.generateFakeUsers();
-         ApiResponse<Integer> response = new ApiResponse<>();
-         response.setData(numOfUsers);
-         return ResponseEntity.ok(response);
+//         Integer numOfUsers = userService.generateFakeUsers();
+        userService.generateFakeUsersAsync();
+        userService.generateFakeUsersAsync();
+        userService.generateFakeUsersAsync();
+        userService.generateFakeUsersAsync();
+        userService.generateFakeUsersAsync();
+        userService.generateFakeUsersAsync();
+        userService.generateFakeUsersAsync();
+        userService.generateFakeUsersAsync();
+        userService.generateFakeUsersAsync();
+        userService.generateFakeUsersAsync();
+        userService.generateFakeUsersAsync();
+        userService.generateFakeUsersAsync();
+        userService.generateFakeUsersAsync();
+        userService.generateFakeUsersAsync();
+        userService.generateFakeUsersAsync();
+        userService.generateFakeUsersAsync();
+        userService.generateFakeUsersAsync();
+        userService.generateFakeUsersAsync();
+        userService.generateFakeUsersAsync();
+        userService.generateFakeUsersAsync();
+
+        ApiResponse<Integer> response = new ApiResponse<>();
+        response.setData(0);
+        return ResponseEntity.ok(response);
     }
 }

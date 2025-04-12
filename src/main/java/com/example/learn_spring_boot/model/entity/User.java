@@ -1,10 +1,10 @@
 package com.example.learn_spring_boot.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.time.LocalDate;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -26,4 +26,7 @@ public class User {
     private String address;
     private String city;
     private String country;
+
+    @Column(columnDefinition = "DATE")
+    private Date birthday;
 }
