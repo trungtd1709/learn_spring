@@ -3,8 +3,9 @@ package com.example.learn_spring_boot.model.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -29,4 +30,7 @@ public class User {
 
     @Column(columnDefinition = "DATE")
     private Date birthday;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Feed> feeds = new ArrayList<>();
 }
