@@ -13,10 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class User extends BaseEntity{
 
     private String username;
     private String password;
@@ -32,5 +29,5 @@ public class User {
     private Date birthday;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<Feed> feeds = new ArrayList<>();
+    private List<Contract> feeds = new ArrayList<>();
 }
