@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequestMapping("/api/user")
 public interface UserEndPoint {
-    @PostMapping("/create")
-    ResponseEntity<ApiResponse<UserDTO>> createUser(@RequestBody UserDTO user);
-
-    @PostMapping("/generate-fake-users")
-    ResponseEntity<ApiResponse<Integer>> generateFakeUsers();
+//    @PostMapping("/create")
+//    ResponseEntity<ApiResponse<UserDTO>> createUser(@RequestBody UserDTO user);
+//
+//    @PostMapping("/generate-fake-users")
+//    ResponseEntity<ApiResponse<Integer>> generateFakeUsers();
 }

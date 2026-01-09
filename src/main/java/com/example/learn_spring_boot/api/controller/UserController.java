@@ -14,18 +14,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class UserController implements UserEndPoint {
     private final UserMapper userMapper;
-    private final UserRepository userRepository;
     private final UserService userService;
 
-    @Override
-    public ResponseEntity<ApiResponse<UserDTO>> createUser(UserDTO userDTO) {
-        return userService.createUser(userDTO);
-    }
-
-    @Override
-    public ResponseEntity<ApiResponse<Integer>> generateFakeUsers() {
-        ApiResponse<Integer> response = new ApiResponse<Integer>();
-        response.setData(0);
-        return ResponseEntity.ok(response);
-    }
+//    @Override
+//    public ResponseEntity<ApiResponse<UserDTO>> createUser(UserDTO userDTO) {
+//        return userService.createUser(userDTO);
+//    }
+//
+//    @Override
+//    public ResponseEntity<ApiResponse<Integer>> generateFakeUsers() {
+//        ApiResponse<Integer> response = new ApiResponse<Integer>();
+//        response.setData(0);
+//        return ResponseEntity.ok(response);
+//    }
 }
