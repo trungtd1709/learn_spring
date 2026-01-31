@@ -32,7 +32,7 @@ public class ProductServiceImpl implements ProductService {
 //        }
         kafkaProducer.send(topic, message);
         log.info("[END sending kafka message]");
-        backgroundService.doHeavyTask();
+//        backgroundService.doHeavyTask();
     }
 
 //    @Override

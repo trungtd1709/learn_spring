@@ -3,11 +3,9 @@ package com.example.learn_spring_boot.core.repository.kafka;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.apache.kafka.common.header.Header;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.kafka.support.KafkaHeaders;
-import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
@@ -65,7 +63,7 @@ public class KafkaConsumerAdvanced {
      */
     @KafkaListener(
             topics = "single-message-topic",
-            groupId = "single-consumer-group",
+            groupId = "${spring.kafka.consumer.group-id}",
             containerFactory = "singleMessageListenerFactory"
     )
     public void consumeSingleMessage(
@@ -107,7 +105,7 @@ public class KafkaConsumerAdvanced {
      */
     @KafkaListener(
             topics = "detailed-message-topic",
-            groupId = "detailed-consumer-group",
+            groupId = "${spring.kafka.consumer.group-id}",
             containerFactory = "singleMessageListenerFactory"
     )
     public void consumeWithFullDetails(
@@ -169,7 +167,7 @@ public class KafkaConsumerAdvanced {
      */
     @KafkaListener(
             topics = "batch-topic",
-            groupId = "batch-consumer-group",
+            groupId = "${spring.kafka.consumer.group-id}",
             containerFactory = "batchListenerFactory"
     )
     public void consumeBatch(
@@ -212,7 +210,7 @@ public class KafkaConsumerAdvanced {
      */
     @KafkaListener(
             topics = "batch-partial-topic",
-            groupId = "batch-partial-group",
+            groupId = "${spring.kafka.consumer.group-id}",
             containerFactory = "batchListenerFactory"
     )
     public void consumeBatchWithPartialAck(
@@ -275,7 +273,7 @@ public class KafkaConsumerAdvanced {
      */
     @KafkaListener(
             topics = "concurrent-topic",
-            groupId = "concurrent-consumer-group",
+            groupId = "${spring.kafka.consumer.group-id}",
             containerFactory = "concurrentListenerFactory"
     )
     public void consumeConcurrent(
@@ -319,7 +317,7 @@ public class KafkaConsumerAdvanced {
      */
     @KafkaListener(
             topics = "batch-concurrent-topic",
-            groupId = "batch-concurrent-group",
+            groupId = "${spring.kafka.consumer.group-id}",
             containerFactory = "batchConcurrentListenerFactory"
     )
     public void consumeBatchConcurrent(
@@ -376,7 +374,7 @@ public class KafkaConsumerAdvanced {
      */
     @KafkaListener(
             topics = "async-topic",
-            groupId = "async-consumer-group",
+            groupId = "${spring.kafka.consumer.group-id}",
             containerFactory = "asyncListenerFactory"
     )
     public void consumeAsync(
@@ -420,7 +418,7 @@ public class KafkaConsumerAdvanced {
      */
     @KafkaListener(
             topics = "async-chain-topic",
-            groupId = "async-chain-group",
+            groupId = "${spring.kafka.consumer.group-id}",
             containerFactory = "asyncListenerFactory"
     )
     public void consumeAsyncWithChaining(
@@ -466,7 +464,7 @@ public class KafkaConsumerAdvanced {
      */
     @KafkaListener(
             topics = "async-batch-topic",
-            groupId = "async-batch-group",
+            groupId = "${spring.kafka.consumer.group-id}",
             containerFactory = "batchListenerFactory"
     )
     public void consumeAsyncBatch(
@@ -514,7 +512,7 @@ public class KafkaConsumerAdvanced {
      */
     @KafkaListener(
             topics = "headers-topic",
-            groupId = "headers-consumer-group",
+            groupId = "${spring.kafka.consumer.group-id}",
             containerFactory = "singleMessageListenerFactory"
     )
     public void consumeWithHeaders(
@@ -561,7 +559,7 @@ public class KafkaConsumerAdvanced {
      */
     @KafkaListener(
             topics = "retry-topic",
-            groupId = "retry-consumer-group",
+            groupId = "${spring.kafka.consumer.group-id}",
             containerFactory = "singleMessageListenerFactory"
     )
     public void consumeWithRetry(
@@ -624,7 +622,7 @@ public class KafkaConsumerAdvanced {
      */
     @KafkaListener(
             topics = "filtered-topic",
-            groupId = "filtered-consumer-group",
+            groupId = "${spring.kafka.consumer.group-id}",
             containerFactory = "singleMessageListenerFactory"
     )
     public void consumeWithFilter(
